@@ -1,0 +1,18 @@
+{
+  "name": "stacopost",
+  "version": "1.0.0",
+  "description": "Stacopost with Vite, express, mySql, Teilwind Css, Flowbite etc",
+  "keywords": [
+    "StacoPost"
+  ],
+  "license": "ISC",
+  "author": "Stacodev",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

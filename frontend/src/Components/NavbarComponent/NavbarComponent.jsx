@@ -14,8 +14,6 @@ const NavbarComponent = () => {
   const loggedInUser = false;
 
   const handleThemeChange = () => {
-    console.log('change');
-
     dispatch(themeChangeAction());
   };
   return (
