@@ -8,7 +8,7 @@ import NavbarComponent from './Components/NavbarComponent/NavbarComponent';
 
 const App = () => {
   return (
-    <div className='bg-sky-950 w-full min-h-screen py-5'>
+    <div className='w-full min-h-screen'>
       <NavbarComponent />
       <Routes>
         <Route path='/' element={<HomeComponent />} />

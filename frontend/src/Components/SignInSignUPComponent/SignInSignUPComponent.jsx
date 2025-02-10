@@ -73,7 +73,7 @@ const SignInSignUPComponent = () => {
   // # Render Function
   return (
     <div className='min-h-screen flex justify-center items-center'>
-      <div className='bg-white w-11/12 h-3/4 mx-auto my-auto flex flex-col lg:flex-row justify-center items-center rounded-lg'>
+      <div className='bg-sky-950 text-white dark:text-sky-950 dark:bg-white w-11/12 h-3/4 mx-auto my-auto flex flex-col lg:flex-row justify-center items-center rounded-lg'>
         <div className='w-full lg:w-1/2 p-3'>
           <img
             src={loginImg}
@@ -82,18 +82,20 @@ const SignInSignUPComponent = () => {
           />
         </div>
         {toggleSignInSignUp ? (
-          <div className='w-full lg:w-1/2 p-3 border-t-2 lg:border-t-0 lg:border-l-2 border-sky-950'>
+          <div className='w-full lg:w-1/2 p-3 border-t-2 lg:border-t-0 lg:border-l-2 border-sky-950 my-3'>
             <div className=''>
-              <h1 className='text-2xl font-bold text-center text-sky-900'>
-                Sign Up
-              </h1>
+              <h1 className='text-2xl font-bold text-center'>Sign Up</h1>
               <form
                 className='flex flex-col gap-4 md:w-full'
                 onSubmit={handleSignUpSubmit}
               >
                 <div>
                   <div className='mb-2 block'>
-                    <Label htmlFor='email' value='Your email' />
+                    <Label
+                      htmlFor='email'
+                      value='Your email'
+                      className='text-white dark:text-sky-950'
+                    />
                   </div>
                   <TextInput
                     id='email'
@@ -105,7 +107,11 @@ const SignInSignUPComponent = () => {
                 </div>
                 <div>
                   <div className='mb-2 block'>
-                    <Label htmlFor='password' value='Your password' />
+                    <Label
+                      htmlFor='password'
+                      value='Your password'
+                      className='text-white dark:text-sky-950'
+                    />
                   </div>
                   <TextInput
                     id='password'
@@ -116,7 +122,11 @@ const SignInSignUPComponent = () => {
                 </div>
                 <div className='relative'>
                   <div className='mb-2 block'>
-                    <Label htmlFor='cPassword' value='Confirm password' />
+                    <Label
+                      htmlFor='cPassword'
+                      value='Confirm password'
+                      className='text-white dark:text-sky-950'
+                    />
                   </div>
                   <TextInput
                     id='cPassword'
@@ -129,9 +139,9 @@ const SignInSignUPComponent = () => {
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? (
-                      <EyeSlashIcon className='w-5 h-5 text-sky-950' />
+                      <EyeSlashIcon className='w-5 h-5 text-sky-950 dark:text-white' />
                     ) : (
-                      <EyeIcon className='w-5 h-5 text-sky-950' />
+                      <EyeIcon className='w-5 h-5 text-sky-950 dark:text-white' />
                     )}
                   </button>
                 </div>
@@ -142,11 +152,14 @@ const SignInSignUPComponent = () => {
                     checked={agreeWithTerms}
                     onChange={() => setAgreeWithTerms(!agreeWithTerms)}
                   />
-                  <Label htmlFor='agree' className='flex'>
+                  <Label
+                    htmlFor='agree'
+                    className='flex text-white dark:text-sky-950'
+                  >
                     I agree with the&nbsp;{''}
                     <button
                       type='button'
-                      className='text-blue-600 underline'
+                      className='underline'
                       onClick={() => setShowTermsAndContition(true)}
                     >
                       Terms & Conditions
@@ -173,7 +186,7 @@ const SignInSignUPComponent = () => {
                     </Modal.Body>
                     <Modal.Footer>
                       <button
-                        className='bg-blue-600 text-white px-4 py-2 rounded-lg'
+                        className='bg-blue-600 px-4 py-2 rounded-lg'
                         onClick={() => setShowTermsAndContition(false)}
                       >
                         Close
@@ -188,9 +201,9 @@ const SignInSignUPComponent = () => {
                   Register new account
                 </Button>
               </form>
-              <p className='text-sm'>
+              <p className='text-sm my-3'>
                 If You have already account, Please{' '}
-                <span className='text-lg text-sky-900 font-semibold'>
+                <span className='text-lg font-semibold'>
                   <button
                     onClick={() => setToggleSignInSignUp(!toggleSignInSignUp)}
                   >
@@ -203,16 +216,18 @@ const SignInSignUPComponent = () => {
         ) : (
           <div className='w-full lg:w-1/2 p-3 border-t-2 lg:border-t-0 lg:border-l-2 border-sky-950'>
             <div className=''>
-              <h1 className='text-2xl font-bold text-center text-sky-900'>
-                Sign In
-              </h1>
+              <h1 className='text-2xl font-bold text-center'>Sign In</h1>
               <form
                 className='flex flex-col gap-4 md:w-full'
                 onSubmit={handleSignInSubmit}
               >
                 <div>
                   <div className='mb-2 block'>
-                    <Label htmlFor='email2' value='Your email' />
+                    <Label
+                      htmlFor='email2'
+                      value='Your email'
+                      className='text-white dark:text-sky-950'
+                    />
                   </div>
                   <TextInput
                     id='email'
@@ -225,7 +240,11 @@ const SignInSignUPComponent = () => {
                 </div>
                 <div>
                   <div className='mb-2 block'>
-                    <Label htmlFor='password2' value='Your password' />
+                    <Label
+                      htmlFor='password2'
+                      value='Your password'
+                      className='text-white dark:text-sky-950'
+                    />
                   </div>
                   <TextInput
                     id='password'
@@ -250,14 +269,14 @@ const SignInSignUPComponent = () => {
                 </div> */}
                 <Button
                   type='submit'
-                  className='bg-gradient-to-r from-sky-600 to-sky-900'
+                  className='bg-gradient-to-r from-sky-600 to-sky-900 mt-3'
                 >
                   Sign In
                 </Button>
               </form>
-              <p className='text-sm'>
+              <p className='text-sm mt-3'>
                 If You have already account, Please{' '}
-                <span className='text-lg text-sky-900 font-semibold'>
+                <span className='text-lg font-semibold'>
                   <button
                     onClick={() => setToggleSignInSignUp(!toggleSignInSignUp)}
                   >
