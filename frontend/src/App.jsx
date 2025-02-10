@@ -1,5 +1,3 @@
-import React from 'react';
-
 // ~ Styling
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
@@ -10,7 +8,7 @@ import NavbarComponent from './Components/NavbarComponent/NavbarComponent';
 
 const App = () => {
   return (
-    <div>
+    <div className='bg-sky-950 w-full min-h-screen py-5'>
       <NavbarComponent />
       <Routes>
         <Route path='/' element={<HomeComponent />} />
