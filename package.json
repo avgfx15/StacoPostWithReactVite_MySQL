@@ -1,0 +1,24 @@
+{
+  "name": "stacopost_vite_react_router_v7_mysql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"npm run start --prefix backend\" \"npm run dev --prefix frontend\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/avgfx15/StacoPostWithReactVite_MySQL.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/avgfx15/StacoPostWithReactVite_MySQL/issues"
+  },
+  "homepage": "https://github.com/avgfx15/StacoPostWithReactVite_MySQL#readme",
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

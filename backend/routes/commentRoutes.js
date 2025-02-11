@@ -1,8 +1,11 @@
 import express from 'express';
-import { commentTestController } from '../controllers/commentControllers';
+
+// ~ All Controllers Actions
+import { commentTestController } from '../controllers/commentControllers.js';
 
 const commentRoutes = express.Router();
 
+// % Test Route
 commentRoutes.get('/test', commentTestController);
 
 export default commentRoutes;
