@@ -5,7 +5,6 @@ import PropTypes from 'prop-types'; // Import PropTypes
 
 export const ThemeProvider = ({ children }) => {
   const themeChange = useSelector(themeChangeState);
-  console.log(themeChange);
 
   return (
     <div className={themeChange}>
