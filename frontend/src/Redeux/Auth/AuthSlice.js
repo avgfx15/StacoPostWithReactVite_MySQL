@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import { signInAction, signOutAction, signUpAction } from './AuthAction';
 
 const initialState = {
-  loggedInUser: null,
-  token: null,
+  loggedInUser: JSON.parse(localStorage.getItem('user')) || null,
+  token: localStorage.getItem('token') || null,
   authLoading: false,
   authError: null,
   authSuccessStatus: null,
@@ -59,6 +59,9 @@ const AuthSlice = createSlice({
       state.authSuccessStatus = action.payload.successStatus;
       state.loggedInUser = action.payload.user;
       state.token = action.payload.token;
+      // $ Store user data in localStorage
+      localStorage.setItem('token', action.payload.token);
+      localStorage.setItem('user', JSON.stringify(action.payload.user));
     });
     // ! Rejected
     build.addCase(signInAction.rejected, (state, action) => {
@@ -83,6 +86,9 @@ const AuthSlice = createSlice({
       state.authSuccessStatus = action.payload.successStatus;
       state.loggedInUser = null;
       state.token = null;
+      // $ Remove user data from localStorage
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
     });
     // ! Rejected
     build.addCase(signOutAction.rejected, (state, action) => {
