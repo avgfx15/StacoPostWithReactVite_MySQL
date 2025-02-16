@@ -6,12 +6,18 @@ import logo from '../../assets/images/logo.png';
 import { Link } from 'react-router-dom';
 
 import { themeChangeAction } from '../../Redeux/Theme/ThemeSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { loggedInUserState } from '../../Redeux/Auth/AuthSlice';
+import { signOutAction } from '../../Redeux/Auth/AuthAction';
 
 const NavbarComponent = () => {
   const dispatch = useDispatch();
 
-  const loggedInUser = false;
+  const loggedInUser = useSelector(loggedInUserState);
+
+  const handleSignOut = () => {
+    dispatch(signOutAction());
+  };
 
   const handleThemeChange = () => {
     dispatch(themeChangeAction());
@@ -63,7 +69,9 @@ const NavbarComponent = () => {
             <Dropdown.Item className='text-sm'>Settings</Dropdown.Item>
             <Dropdown.Item className='text-sm'>Earnings</Dropdown.Item>
             <Dropdown.Divider />
-            <Dropdown.Item className='text-sm'>Sign out</Dropdown.Item>
+            <Dropdown.Item className='text-sm' onClick={handleSignOut}>
+              Sign out
+            </Dropdown.Item>
           </Dropdown>
         ) : (
           <div className='flex items-center mr-2 text-sky-950 dark:text-white'>

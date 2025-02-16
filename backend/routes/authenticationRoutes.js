@@ -4,6 +4,7 @@ import express from 'express';
 import {
   authTestController,
   signInController,
+  signOutController,
   signUpController,
 } from '../controllers/authControllers.js';
 
@@ -17,5 +18,8 @@ authenticationRoute.post('/signin', signInController);
 
 // % Sign Up Route
 authenticationRoute.post('/signup', signUpController);
+
+// % Sign Out Route
+authenticationRoute.post('/signout', signOutController);
 
 export default authenticationRoute;

@@ -9,9 +9,17 @@ import loginImg from '../../assets/images/christin-hume-mfB1B1s4sMc-unsplash.jpg
 
 // ~ React Hook
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { authErrorMessageState } from '../../Redeux/Auth/AuthSlice';
+import { toast } from 'react-toastify';
+import { signInAction, signUpAction } from '../../Redeux/Auth/AuthAction';
 
 // # Main SingIn SIgnUp Function
 const SignInSignUPComponent = () => {
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
   // & Toggle SignIn SignUp
   const [toggleSignInSignUp, setToggleSignInSignUp] = useState(false);
 
@@ -23,6 +31,10 @@ const SignInSignUPComponent = () => {
 
   // & Toggle Show Terms and Conditions
   const [showTermsAndCondition, setShowTermsAndContition] = useState(false);
+
+  // / Get Current State From Redux Store
+
+  const authErrorMessage = useSelector(authErrorMessageState);
 
   // & Get Input Data
   const [formData, setFormData] = useState({
@@ -41,32 +53,54 @@ const SignInSignUPComponent = () => {
   const handleSignUpSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      if (!formData.cPassword || !formData.email || !formData.password) {
-        console.log('All fields are required');
-      } else if (formData.cPassword !== formData.password) {
-        console.log('Password and Confirmed Password do not match');
-      } else if (!agreeWithTerms) {
-        console.log('You must agree to the Terms and Conditions');
+    if (!formData.cPassword || !formData.email || !formData.password) {
+      toast.info('All fields are required');
+    } else if (formData.cPassword !== formData.password) {
+      toast.info('Password and Confirmed Password do not match');
+    } else if (!agreeWithTerms) {
+      toast.info('You must agree to the Terms and Conditions');
+    } else {
+      const response = await dispatch(signUpAction(formData));
+
+      if (response.meta.requestStatus === 'rejected') {
+        toast.error(response.payload);
+      } else if (response.meta.requestStatus === 'fulfilled') {
+        toast.success(response.payload.message);
       } else {
-        console.log(formData);
-        console.log('Sign Up Successful');
+        toast.info('Something went wrong');
       }
-    } catch (error) {
-      console.log(error);
     }
+    setFormData({
+      email: '',
+      password: '',
+      cPassword: '',
+    });
   };
   // % Handle SignIN Submit
   const handleSignInSubmit = async (e) => {
     e.preventDefault();
+
     try {
       if (!formData.email || !formData.password) {
-        console.log('All fields are required');
+        toast.info('All fields are required');
       } else {
-        console.log(formData);
+        const response = await dispatch(signInAction(formData));
+
+        if (response.meta.requestStatus === 'rejected') {
+          toast.error(response.payload);
+        } else if (response.meta.requestStatus === 'fulfilled') {
+          toast.success(response.payload.message);
+          navigate('/');
+        } else {
+          toast.info('Something went wrong');
+        }
       }
+      setFormData({
+        email: '',
+        password: '',
+      });
     } catch (error) {
-      console.log(error);
+      toast.error(authErrorMessage, error);
     }
   };
 
@@ -101,6 +135,7 @@ const SignInSignUPComponent = () => {
                     id='email'
                     type='email'
                     placeholder='test@gmail.com'
+                    value={formData.email}
                     onChange={handleChange}
                     shadow
                   />
@@ -118,6 +153,7 @@ const SignInSignUPComponent = () => {
                     type='password'
                     shadow
                     onChange={handleChange}
+                    value={formData.password}
                   />
                 </div>
                 <div className='relative'>
@@ -132,6 +168,7 @@ const SignInSignUPComponent = () => {
                     id='cPassword'
                     type={showPassword ? 'text' : 'password'}
                     onChange={handleChange}
+                    value={formData.cPassword}
                   />
                   <button
                     type='button'
@@ -197,6 +234,7 @@ const SignInSignUPComponent = () => {
                 <Button
                   type='submit'
                   className='bg-gradient-to-r from-sky-600 to-sky-900'
+                  disabled={!agreeWithTerms}
                 >
                   Register new account
                 </Button>
@@ -235,6 +273,7 @@ const SignInSignUPComponent = () => {
                     placeholder='name@flowbite.com'
                     required
                     onChange={handleChange}
+                    value={formData.email}
                     shadow
                   />
                 </div>
@@ -252,6 +291,7 @@ const SignInSignUPComponent = () => {
                     required
                     shadow
                     onChange={handleChange}
+                    value={formData.password}
                   />
                 </div>
 
