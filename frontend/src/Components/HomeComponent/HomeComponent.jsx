@@ -23,9 +23,6 @@ const HomeComponent = () => {
   // * Display Post with Limits
   const displayPost = allPosts.slice(0, visiblePost);
 
-  // ? Content Expanded
-  const [contentExpaneded, setContentExpanded] = useState(false);
-
   // # Render With Return
   return (
     <div className='flex flex-col items-center justify-center w-full'>
@@ -65,9 +62,8 @@ const HomeComponent = () => {
                   </span>
                 </p>
                 <p className='font-normal text-gray-700 dark:text-gray-400 '>
-                  {contentExpaneded
-                    ? post.postContent
-                    : post.postContent.slice(0, 130) +
+                  {post.postContent &&
+                    post.postContent.slice(0, 130) +
                       (post.postContent.length > 130 ? '...' : '')}
                 </p>
                 {post.postContent.length > 130 && (
@@ -75,7 +71,7 @@ const HomeComponent = () => {
                     to={`/posts/${post.slug}`}
                     className='z-10 absolute group-hover:bottom-0 bottom-[-200px] left-0 right-0 border border-teal-500 text-teal-500 hover:bg-teal-500 hover:text-white transition-all duration-300 text-center py-2 rounded-md !rounded-tl-none m-2'
                   >
-                    {contentExpaneded ? 'Read Less' : 'Read More'}
+                    Read More
                   </Link>
                 )}
               </div>
