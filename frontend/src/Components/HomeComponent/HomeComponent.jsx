@@ -1,5 +1,7 @@
 //~ Import from Flowbite
-import { Button, Card } from 'flowbite-react';
+import { Button } from 'flowbite-react';
+
+import { Link } from 'react-router-dom';
 
 // ~ Import All Posts
 import allPosts from '../../AllPost';
@@ -27,54 +29,58 @@ const HomeComponent = () => {
   // # Render With Return
   return (
     <div className='flex flex-col items-center justify-center w-full'>
-      <div className='flex  flex-worp gap-4'>
+      <div className='flex flex-wrap gap-3 justify-center my-3'>
         {displayPost.map((post) => (
-          <Card
-            key={post.id}
-            className='relative rounded-xl w-72 h-[550px] flex flex-col'
-            renderImage={() => (
-              <img
-                src={post.postImage}
-                alt='post'
-                className='h-3/4 object-cover object-center w-full rounded-t-xl'
-              />
-            )}
-          >
-            <h5 className='text-xl font-bold tracking-tight text-gray-900 dark:text-white'>
-              {post.postTitle.slice(0, 20) +
-                (post.postTitle.length > 20 ? '...' : '')}
-            </h5>
-            <div className='flex flex-col justify-center border-t-2 py-3 border-b-2 border-t-sky-500 border-b-sky-500'>
-              <p className='text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2'>
-                Location : -{' '}
-                <span className='text-sky-400 text-md font-semibold'>
-                  {post.postLocation}
-                </span>
-              </p>
-              <p className='text-sm font-semibold text-gray-700 dark:text-gray-300'>
-                Category : -{' '}
-                <span className='text-sky-400 text-md font-semibold'>
-                  {' '}
-                  {post.postCategory}
-                </span>
-              </p>
+          <div className='' key={post.id}>
+            <div className='group relative w-full border h-[500px] overflow-hidden rounded-lg sm:w-[350px] border-teal-500 hover:border-2 transition-all duration-300'>
+              <Link to={`/posts/${post.slug}`}>
+                <img
+                  alt='recentpost'
+                  src={post.postImage}
+                  className='h-[260px] w-full object-cover group-hover:h-[200px] transition-all duration-300 z-20'
+                />
+              </Link>
+              <div className='p-3 flex flex-col gap-2'>
+                <p className='text-xl font-bold tracking-tight text-gray-900 dark:text-white'>
+                  {post.postTitle.slice(0, 30) +
+                    (post.postTitle.length > 30 ? '...' : '')}
+                </p>
+                <p className='text-lg font-bold tracking-tight text-gray-900 dark:text-white'>
+                  Tag : -{' '}
+                  {post.postTag.slice(0, 30) +
+                    (post.postTag.length > 30 ? '...' : '')}
+                </p>
+                <p className='text-sm font-semibold text-gray-700 dark:text-gray-300'>
+                  Category : -{' '}
+                  <span className='text-sky-400 text-md font-semibold'>
+                    {' '}
+                    {post.postCategory}
+                  </span>
+                </p>
+                <p className='text-sm font-semibold text-gray-700 dark:text-gray-300'>
+                  Location : -{' '}
+                  <span className='text-sky-400 text-md font-semibold'>
+                    {' '}
+                    {post.postLocation}
+                  </span>
+                </p>
+                <p className='font-normal text-gray-700 dark:text-gray-400 '>
+                  {contentExpaneded
+                    ? post.postContent
+                    : post.postContent.slice(0, 130) +
+                      (post.postContent.length > 130 ? '...' : '')}
+                </p>
+                {post.postContent.length > 130 && (
+                  <Link
+                    to={`/posts/${post.slug}`}
+                    className='z-10 absolute group-hover:bottom-0 bottom-[-200px] left-0 right-0 border border-teal-500 text-teal-500 hover:bg-teal-500 hover:text-white transition-all duration-300 text-center py-2 rounded-md !rounded-tl-none m-2'
+                  >
+                    {contentExpaneded ? 'Read Less' : 'Read More'}
+                  </Link>
+                )}
+              </div>
             </div>
-            <p className='font-normal text-gray-700 dark:text-gray-400'>
-              {contentExpaneded
-                ? post.postContent
-                : post.postContent.slice(0, 100) +
-                  (post.postContent.length > 100 ? '...' : '')}
-            </p>
-            {post.postContent.length > 100 && (
-              <button
-                type='button'
-                onClick={() => setContentExpanded(!contentExpaneded)}
-                className=' absolute bottom-2 self-center whitespace-nowrap text-xl text-white font-semibold bg-gradient-to-r from-blue-600 to-blue-900 py-1 px-3 rounded my-2'
-              >
-                {contentExpaneded ? 'Read Less' : 'Read More'}
-              </button>
-            )}
-          </Card>
+          </div>
         ))}
       </div>
       <div className='my-5'>
